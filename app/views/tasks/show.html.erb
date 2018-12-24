@@ -1,0 +1,11 @@
+<%= render 'header' %>
+<strong>Title: </strong>
+<%= @task.title %>
+<br></br>
+<strong>Description: </strong>
+<%= @task.description %>
+<br></br>
+<strong>Status: </strong>
+<%= @task.status %>
+<br></br>
+<%= link_to 'Back', tasks_path %>

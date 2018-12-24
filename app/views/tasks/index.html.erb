@@ -1,0 +1,32 @@
+<%= render 'header' %>
+<br></br>
+<%# debug @task %>
+
+<div id = "tasks" data-url = "<%=sort_tasks_path%>">
+<% @task.each_with_index do |t,index| %>
+  <div class = "row" id = <%= dom_id(t) %>>
+      <div class = "col-sm-1">
+            <center><%= t.position %></center>
+      </div>
+      <div class = "col-sm-2">
+            <%= t.title.truncate(25) %>
+      </div>
+      <div class = "col-sm-5">
+            <%= t.description %>
+      </div>
+      <div class = "col-sm-1">
+            <%= t.status %>
+      </div>
+      <div class = "col">
+            <center>
+            <%= link_to edit_task_path(t) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to t, method: :delete, data: {confirm:"Delete Task?"} do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+            </center>
+      </div>
+  </div>
+<% end%>
+</div>

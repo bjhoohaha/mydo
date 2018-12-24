@@ -1,0 +1,23 @@
+<%= render 'header' %>
+<%= #form for @task variable
+    form_for  @task,
+    #routing to new
+    url: {action: "create"},
+    #name of class for html file
+    html: {class: "task_form"}  do |f| %>
+
+  <%= f.label :title%>
+  <%= f.text_field :title%>
+  <br></br>
+  <%= f.label :description%>
+  <%= f.text_area :description%>
+  <br></br>
+  <%= f.label :status%>
+  <%= f.select :status, options_for_select(
+  ["In Progress", "Awaiting Reply", "Pending", "Completed"] )%>
+  <br></br>
+
+  <%= f.submit %>
+  <p><%= link_to 'Back', tasks_path %></p>
+
+<% end %>

@@ -1,0 +1,14 @@
+<div id = "alert_container" >
+  <% unless flash.empty? %>
+    <div class ="alert alert-warning">
+
+      <strong> Update: </strong>
+      <%= flash.alert %>
+
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+
+    </div>
+  <% end %>
+</div>

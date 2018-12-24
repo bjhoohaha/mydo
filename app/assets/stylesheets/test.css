@@ -14,9 +14,13 @@
  .row {
    background-color : white;
    font-size: 12pt;
-   padding: 10px;
+   padding: 20px;
+   height: 67px;
  }
 
-.task_completed{
-  color: green;
+
+
+#alert_container{
+  margin: 0px 30px;
+  height: 60px;
 }

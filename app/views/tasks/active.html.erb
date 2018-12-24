@@ -1,0 +1,199 @@
+<%= render 'header' %>
+<br></br>
+<%= render 'alert' %>
+<% @num = 1%>
+<div id = "tasks" class = "ui-sortable" data-url = "<%=sort_tasks_path%>">
+<% @task_inprogress.each_with_index do |t,index| %>
+  <div class = "row" id = <%= dom_id(t) %>>
+    <% @update_status = t.status %>
+      <div class = "col-sm-1">
+            <center><%= @num %></center>
+            <% @num = @num + 1 %>
+      </div>
+      <div class = "col-sm-2">
+            <%= t.title.truncate(25) %>
+      </div>
+      <div class = "col-sm-5">
+            <%= t.description %>
+      </div>
+      <div class = "col-sm-1">
+            <%= t.status %>
+      </div>
+      <div class= "col-sm-1">
+      <% if @update_status == "In Progress" %>
+
+      <%= button_to "Awaiting Reply",
+      {
+        :controller => "tasks",
+        :action => "update_status",
+        :id => t.id,
+
+      }, method: :patch%>
+
+      <% elsif @update_status == "Awaiting Reply" %>
+
+      <%= button_to "Pending",
+      {
+        :controller => "tasks",
+        :action => "update_status",
+        :id => t.id,
+
+      }, method: :patch%>
+      <% end %>
+      </div>
+
+      <div class= "col-sm-1">
+      <%= button_to "Completed",
+      {
+        :controller => "tasks",
+        :action => "complete_task",
+        :id => t.id,
+
+      }, method: :patch%>
+
+      </div>
+      <div class = "col-sm-1">
+            <center>
+            <%= link_to edit_task_path(t) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to t, method: :delete, data: {confirm:"Delete Task?"} do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+            </center>
+      </div>
+  </div>
+<% end %>
+<br></br>
+</div>
+
+<div id = "tasks-2" class = "ui-sortable" data-url = "<%=sort_tasks_path%>">
+<% @task_awaitingreply.each_with_index do |t,index| %>
+  <div class = "row ui-sortable-handle" id = <%= dom_id(t) %>>
+    <% @update_status = t.status %>
+      <div class = "col-sm-1">
+        <center><%= @num %></center>
+        <% @num = @num + 1 %>
+      </div>
+      <div class = "col-sm-2">
+            <%= t.title.truncate(25) %>
+      </div>
+      <div class = "col-sm-5">
+            <%= t.description %>
+      </div>
+      <div class = "col-sm-1">
+            <%= t.status %>
+      </div>
+      <div class= "col-sm-1">
+      <% if @update_status == "In Progress" %>
+
+      <%= button_to "Awaiting Reply",
+      {
+        :controller => "tasks",
+        :action => "update_status",
+        :id => t.id,
+
+      }, method: :patch%>
+
+      <% elsif @update_status == "Awaiting Reply" %>
+
+      <%= button_to "Pending",
+      {
+        :controller => "tasks",
+        :action => "update_status",
+        :id => t.id,
+
+      }, method: :patch%>
+      <% end %>
+      </div>
+
+      <div class= "col-sm-1">
+      <%= button_to "Completed",
+      {
+        :controller => "tasks",
+        :action => "complete_task",
+        :id => t.id,
+
+      }, method: :patch%>
+
+      </div>
+      <div class = "col-sm-1">
+            <center>
+            <%= link_to edit_task_path(t) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to t, method: :delete, data: {confirm:"Delete Task?"} do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+            </center>
+      </div>
+  </div>
+<% end %>
+
+<br></br>
+</div>
+
+<div id = "tasks-3" class = "ui-sortable" data-url = "<%=sort_tasks_path%>">
+<% @task_pending.each_with_index do |t,index| %>
+  <div class = "row ui-sortable-handle" id = <%= dom_id(t) %>>
+    <% @update_status = t.status %>
+      <div class = "col-sm-1">
+        <center><%= @num %></center>
+        <% @num = @num + 1 %>
+      </div>
+      <div class = "col-sm-2">
+            <%= t.title.truncate(25) %>
+      </div>
+      <div class = "col-sm-5">
+            <%= t.description %>
+      </div>
+      <div class = "col-sm-1">
+            <%= t.status %>
+      </div>
+      <div class= "col-sm-1">
+      <% if @update_status == "In Progress" %>
+
+      <%= button_to "Awaiting Reply",
+      {
+        :controller => "tasks",
+        :action => "update_status",
+        :id => t.id,
+
+      }, method: :patch%>
+
+      <% elsif @update_status == "Awaiting Reply" %>
+
+      <%= button_to "Pending",
+      {
+        :controller => "tasks",
+        :action => "update_status",
+        :id => t.id,
+
+      }, method: :patch%>
+      <% end %>
+      </div>
+
+      <div class= "col-sm-1">
+      <%= button_to "Completed",
+      {
+        :controller => "tasks",
+        :action => "complete_task",
+        :id => t.id,
+
+      }, method: :patch%>
+
+      </div>
+      <div class = "col-sm-1">
+            <center>
+            <%= link_to edit_task_path(t) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to t, method: :delete, data: {confirm:"Delete Task?"} do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+            </center>
+      </div>
+  </div>
+<% end %>
+<br></br>
+</div>

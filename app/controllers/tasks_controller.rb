@@ -1,7 +1,20 @@
 class TasksController < ApplicationController
   # create new instance of the task
+
   def index
-    @task = Task.order("position")
+    # @task.order("position")
+    @task = custom_order
+
+  end
+
+  def completed
+    @task = Task.where(status:"Completed").order("position")
+  end
+
+  def active
+    @task_inprogress = find_task_status("In Progress")
+    @task_awaitingreply = find_task_status("Awaiting Reply")
+    @task_pending = find_task_status("Pending")
   end
 
   def new
@@ -13,8 +26,18 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.save
 
-    #redirect to url
-    redirect_to @task
+      redirect_to @task
+  end
+
+  def complete_task
+    @task = find_task
+    if @task.status == "Completed"
+      redirect_to request.referrer, :alert => "Task already completed!"
+    else
+      @task.status = "Completed"
+      @task.save
+      redirect_to request.referrer
+    end
   end
 
   def show
@@ -50,13 +73,28 @@ class TasksController < ApplicationController
 
   def delete_multiple
 
-  Task.destroy(params[:tasks])
+    Task.destroy(params[:tasks])
 
-  redirect_to tasks_path
+    redirect_to tasks_path
 
   end
 
-end
+  def update_status
+    @task = find_task
+    if @task.status == "In Progress"
+
+      @task.update(:status => "Awaiting Reply")
+      redirect_to request.referrer
+    elsif @task.status == "Awaiting Reply"
+      @task.update(:status => "Pending")
+      redirect_to request.referrer
+    elsif @task.status == "Pending"
+      @task.update(:status => "Completed")
+      redirect_to request.referrer
+    else
+      redirect_to request.referrer, :alert => "Task already completed!"
+    end
+  end
 
 private
  def task_params
@@ -67,3 +105,23 @@ private
    @task  = Task.find(params[:id])
    return @task
  end
+
+ def find_task_status(s)
+   return Task.where(status: s).order("position")
+ end
+
+ def custom_order
+   @arr = []
+   @arr_with_status = ["In Progress", "Awaiting Reply", "Pending", "Completed"]
+
+   def push_into_array(v)
+     v.each do |p|
+       @arr.push(p)
+    end
+  end
+
+   @arr_with_status.map{|a| push_into_array(find_task_status(a))}
+
+   return @arr
+ end
+end

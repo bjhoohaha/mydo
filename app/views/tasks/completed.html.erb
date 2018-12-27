@@ -5,7 +5,7 @@
 
 
 <% @task.each_with_index do |t,index| %>
-  <div class = "row" id = <%= dom_id(t) %>>
+  <div class = "row" id = <%= dom_id(t) %> style = "background-color:<%= t.color%>">
       <div class = "col-sm-1">
             <center><%= t.position %></center>
       </div>

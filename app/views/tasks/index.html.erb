@@ -1,10 +1,10 @@
 <%= render 'header' %>
 <br></br>
 <%= render 'alert' %>
-
+<%# debug @task %>
 
 <% @task.each_with_index do |t,index| %>
-  <div class = "row" id = <%= dom_id(t) %>>
+  <div class = "row" style = "background-color:<%= t.color%>">
     <% @update_status = t.status %>
       <div class = "col-sm-1">
             <center><%= index + 1 %></center>

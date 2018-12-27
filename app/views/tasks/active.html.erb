@@ -4,7 +4,7 @@
 <% @num = 1%>
 <div id = "tasks" class = "ui-sortable" data-url = "<%=sort_tasks_path%>">
 <% @task_inprogress.each_with_index do |t,index| %>
-  <div class = "row" id = <%= dom_id(t) %>>
+  <div class = "row" id = <%= dom_id(t) %> style = "background-color:<%= t.color%>">
     <% @update_status = t.status %>
       <div class = "col-sm-1">
             <center><%= @num %></center>
@@ -69,7 +69,7 @@
 
 <div id = "tasks-2" class = "ui-sortable" data-url = "<%=sort_tasks_path%>">
 <% @task_awaitingreply.each_with_index do |t,index| %>
-  <div class = "row ui-sortable-handle" id = <%= dom_id(t) %>>
+  <div class = "row ui-sortable-handle" id = <%= dom_id(t) %>style = "background-color:<%= t.color%>">
     <% @update_status = t.status %>
       <div class = "col-sm-1">
         <center><%= @num %></center>
@@ -135,7 +135,7 @@
 
 <div id = "tasks-3" class = "ui-sortable" data-url = "<%=sort_tasks_path%>">
 <% @task_pending.each_with_index do |t,index| %>
-  <div class = "row ui-sortable-handle" id = <%= dom_id(t) %>>
+  <div class = "row ui-sortable-handle" id = <%= dom_id(t) %> style = "background-color:<%= t.color%>">
     <% @update_status = t.status %>
       <div class = "col-sm-1">
         <center><%= @num %></center>

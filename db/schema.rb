@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_23_152624) do
+ActiveRecord::Schema.define(version: 2018_12_27_131647) do
 
   create_table "tasks", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2018_12_23_152624) do
     t.integer "position"
     t.integer "sort"
     t.string "status"
+    t.string "color"
+    t.date "due_date"
   end
 
 end

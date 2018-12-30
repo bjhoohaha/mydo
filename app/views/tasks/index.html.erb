@@ -12,10 +12,18 @@
       <div class = "col-sm-2">
             <%= t.title.truncate(25) %>
       </div>
-      <div class = "col-sm-5">
+      <div class = "col-sm-4">
             <%= t.description %>
       </div>
-      <div class = "col-sm-1">
+      <div class = "col-sm-1"><center>
+        <% unless t.due_date.blank? %>
+        <%= (t.due_date - Date.today).numerator %>
+        <% end %>
+</div>
+<div class = "col-sm-1">
+        <%= link_to bookmark_task_tasks_path(:id => t.id), class:"bookmark", method: :patch, remote:true do%>
+        <span class = "glyphicon glyphicon-tag"></span>
+        <% end %>
             <%= t.status %>
       </div>
       <div class= "col-sm-1">
@@ -37,6 +45,7 @@
         :action => "update_status",
         :id => t.id,
 
+
       }, method: :patch%>
       <% end %>
       </div>
@@ -48,15 +57,15 @@
         :action => "complete_task",
         :id => t.id,
 
-      }, method: :patch%>
+      }, method: :patch, remote:true%>
 
       </div>
       <div class = "col-sm-1">
             <center>
-            <%= link_to edit_task_path(t) do %>
+            <%= link_to edit_task_path(t), class: "link-edit" do %>
             <span class="glyphicon glyphicon-pencil"></span>
             <% end %>
-            <%= link_to t, method: :delete, data: {confirm:"Delete Task?"} do %>
+            <%= link_to t, class:"link-delete", remote: true, method: :delete do %>
               <span class="glyphicon glyphicon-trash"></span>
             <% end %>
             </center>

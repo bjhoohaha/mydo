@@ -7,13 +7,19 @@
 <% @task.each_with_index do |t,index| %>
   <div class = "row" id = <%= dom_id(t) %> style = "background-color:<%= t.color%>">
       <div class = "col-sm-1">
-            <center><%= t.position %></center>
+            <center><%= index + 1 %></center>
       </div>
       <div class = "col-sm-2">
             <%= t.title.truncate(25) %>
       </div>
-      <div class = "col-sm-5">
+      <div class = "col-sm-4">
             <%= t.description %>
+      </div>
+      <div class = "col-sm-1">
+        <%= link_to bookmark_task_tasks_path(:id => t.id), class:"bookmark", method: :patch do%>
+        <span class = "glyphicon glyphicon-tag"></span>
+        <% end %>
+            <%= t.status %>
       </div>
       <div class = "col-sm-1">
             <%= t.status %>

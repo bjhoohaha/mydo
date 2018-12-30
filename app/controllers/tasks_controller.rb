@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   def index
     # @task.order("position")
     @task = custom_order
+    @latest_task = Task.all.order('created_at DESC').first
 
   end
 
@@ -24,9 +25,21 @@ class TasksController < ApplicationController
   def create
     #create a new instance
     @task = Task.new(task_params)
+    @task.position = 1
     @task.save
 
-      redirect_to @task
+    redirect_to @task
+  end
+
+  def bookmark_task
+    @task = find_task
+    if @task.color.empty?
+      @task.color = "#FFD662"
+      @task.save
+    else
+      @task.color = ""
+      @task.save
+    end
   end
 
   def complete_task
@@ -49,17 +62,18 @@ class TasksController < ApplicationController
   end
 
   def update
+    puts @task
     find_task
     @task.update(task_params)
 
-
+    puts @task
     redirect_to @task
   end
 
   def destroy
     find_task.destroy
 
-    redirect_to tasks_path
+    redirect_to request.referrer
   end
 
   def sort
@@ -98,7 +112,7 @@ class TasksController < ApplicationController
 
 private
  def task_params
-   params.require(:task).permit(:title, :description, :status, :color)
+   params.require(:task).permit(:title, :description, :status, :color, :due_date)
  end
 
  def find_task

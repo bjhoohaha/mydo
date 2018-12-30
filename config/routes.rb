@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     collection do
       patch :sort
       patch :complete_task
+      patch :bookmark_task
       get :completed
       get :active
       delete :delete_multiple

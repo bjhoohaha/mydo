@@ -20,6 +20,8 @@
   {class: "form form-group form-control"}%>
   <input class= "color_picker" type="string" id ="task_color" name="task[color]" data-palette='["#0F8DFC","rgba(135,1,101)","#F00285","hsla(190,41%,95%,1)","#94B77E","#4C060A","#053F32","#ED8074","#788364","#FFD662"]' value = <%= @task.color %> >
   <br></br>
+  <input class = "datepicker" type= "date" name="task[due_date]" value = <%= @task.due_date %>  >
+  <br></br>
 
   <%= f.submit %>
   <p><%= link_to 'Back', tasks_path %></p>

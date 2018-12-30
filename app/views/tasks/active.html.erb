@@ -13,8 +13,14 @@
       <div class = "col-sm-2">
             <%= t.title.truncate(25) %>
       </div>
-      <div class = "col-sm-5">
+      <div class = "col-sm-4">
             <%= t.description %>
+      </div>
+      <div class = "col-sm-1">
+        <%= link_to bookmark_task_tasks_path(:id => t.id), class:"bookmark", method: :patch do%>
+        <span class = "glyphicon glyphicon-tag"></span>
+        <% end %>
+            <%= t.status %>
       </div>
       <div class = "col-sm-1">
             <%= t.status %>
@@ -78,8 +84,14 @@
       <div class = "col-sm-2">
             <%= t.title.truncate(25) %>
       </div>
-      <div class = "col-sm-5">
+      <div class = "col-sm-4">
             <%= t.description %>
+      </div>
+      <div class = "col-sm-1">
+        <%= link_to bookmark_task_tasks_path(:id => t.id), class:"bookmark", method: :patch do%>
+        <span class = "glyphicon glyphicon-tag"></span>
+        <% end %>
+            <%= t.status %>
       </div>
       <div class = "col-sm-1">
             <%= t.status %>
@@ -144,8 +156,13 @@
       <div class = "col-sm-2">
             <%= t.title.truncate(25) %>
       </div>
-      <div class = "col-sm-5">
+      <div class = "col-sm-4">
             <%= t.description %>
+      </div>
+      <div class = "col-sm-1">
+        <%= link_to bookmark_task_tasks_path(:id => t.id), class:"bookmark", method: :patch do%>
+        <span class = "glyphicon glyphicon-tag"></span>
+        <% end %>
       </div>
       <div class = "col-sm-1">
             <%= t.status %>

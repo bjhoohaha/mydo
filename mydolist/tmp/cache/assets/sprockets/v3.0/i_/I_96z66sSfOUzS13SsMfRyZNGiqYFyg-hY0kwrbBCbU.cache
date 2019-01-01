@@ -1,0 +1,9 @@
+I"»(function() {
+  $(function() {
+    return $(".link-delete").on("ajax:success", function(e, data, status, xhr) {
+      return alert("The post was deleted.");
+    });
+  });
+
+}).call(this);
+:ET

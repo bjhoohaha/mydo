@@ -57,7 +57,8 @@
         :action => "complete_task",
         :id => t.id,
 
-      }, method: :patch, remote:true%>
+      }, method: :patch, remote:true, id: "complete-button"%>
+
 
       </div>
       <div class = "col-sm-1">
@@ -72,14 +73,12 @@
       </div>
   </div>
 <% end %>
-
 <%= button_to "Show all completed",
 {
   :controller => "tasks",
   :action => "completed",
 
 }, method: :get %>
-<br></br>
 <%= button_to "Show all active",
 {
   :controller => "tasks",

@@ -42,7 +42,7 @@ $(document).on("turbolinks:load", function(){
   $("a.bookmark").click(function (){
       var row = $(this).parent().parent();
       var current_color = row.css("background-color");
-      //lert(current_color);
+      //alert(current_color);
       if(current_color !==  "rgb(255, 255, 255)") {
         row.css("background-color", "rgb(255, 255, 255)");
       } else{
@@ -51,6 +51,10 @@ $(document).on("turbolinks:load", function(){
   });
   $("a.bookmark").on( "ajax:success", function (event) {
     console.log("color is changed to " + $(this).parent().parent().css("background-color"));
+  });
+  $("input[value='Completed']").on("ajax:sucess", function (){
+    console.log("task status changed to completed");
+    alert("Task completed!");
   });
   //display message for success
 });

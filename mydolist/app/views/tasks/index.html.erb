@@ -1,78 +1,18 @@
 <%= render 'header' %>
 <br></br>
-<%= render 'alert' %>
 <%# debug @task %>
-
-<% @task.each_with_index do |t,index| %>
-  <div class = "row" style = "background-color:<%= t.color%>">
-    <% @update_status = t.status %>
-      <div class = "col-sm-1">
-            <center><%= index + 1 %></center>
-      </div>
-      <div class = "col-sm-2">
-            <%= t.title.truncate(25) %>
-      </div>
-      <div class = "col-sm-4">
-            <%= t.description %>
-      </div>
-      <div class = "col-sm-1"><center>
-        <% unless t.due_date.blank? %>
-        <%= (t.due_date - Date.today).numerator %>
-        <% end %>
+<div id = "in-progress">
+<%= render "table", task_parameter: @task_inprogress %>
 </div>
-<div class = "col-sm-1">
-        <%= link_to bookmark_task_tasks_path(:id => t.id), class:"bookmark", method: :patch, remote:true do%>
-        <span class = "glyphicon glyphicon-tag"></span>
-        <% end %>
-            <%= t.status %>
-      </div>
-      <div class= "col-sm-1">
-      <% if @update_status == "In Progress" %>
-
-      <%= button_to "Awaiting Reply",
-      {
-        :controller => "tasks",
-        :action => "update_status",
-        :id => t.id,
-
-      }, method: :patch%>
-
-      <% elsif @update_status == "Awaiting Reply" %>
-
-      <%= button_to "Pending",
-      {
-        :controller => "tasks",
-        :action => "update_status",
-        :id => t.id,
-
-
-      }, method: :patch%>
-      <% end %>
-      </div>
-
-      <div class= "col-sm-1">
-      <%= button_to "Completed",
-      {
-        :controller => "tasks",
-        :action => "complete_task",
-        :id => t.id,
-
-      }, method: :patch, remote:true, id: "complete-button"%>
-
-
-      </div>
-      <div class = "col-sm-1">
-            <center>
-            <%= link_to edit_task_path(t), class: "link-edit" do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-            <% end %>
-            <%= link_to t, class:"link-delete", remote: true, method: :delete do %>
-              <span class="glyphicon glyphicon-trash"></span>
-            <% end %>
-            </center>
-      </div>
-  </div>
-<% end %>
+<div id = "awaiting-reply">
+<%= render "table", task_parameter: @task_awaitingreply %>
+</div>
+<div id = "pending">
+<%= render "table", task_parameter: @task_pending %>
+</div>
+<div id = "completed">
+<%= render "table", task_parameter: @task_completed %>
+</div>
 <%= button_to "Show all completed",
 {
   :controller => "tasks",

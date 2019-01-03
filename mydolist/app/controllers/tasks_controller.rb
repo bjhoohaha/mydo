@@ -3,8 +3,11 @@ class TasksController < ApplicationController
 
   def index
     # @task.order("position")
-    @task = custom_order
-    @latest_task = Task.all.order('created_at DESC').first
+    @task_inprogress = find_task_status("In Progress")
+    @task_awaitingreply = find_task_status("Awaiting Reply")
+    @task_pending = find_task_status("Pending")
+    @task_completed = find_task_status("Completed")
+    @latest_task = Task.all.order('updated_at DESC').first
 
   end
 
@@ -45,12 +48,16 @@ class TasksController < ApplicationController
   def complete_task
     @task = find_task
     if @task.status == "Completed"
-      redirect_to request.referrer, :alert => "Task already completed!"
+      # redirect_to request.referrer, :alert => "Task already completed!"
     else
       @task.status = "Completed"
+      @task.position = 1
       @task.save
-      redirect_to request.referrer
     end
+
+    # respond_to do |format|
+    #   format.html {redirect_to request.referrer}
+    # end
   end
 
   def show
@@ -62,7 +69,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    puts @task
     find_task
     @task.update(task_params)
 
@@ -73,7 +79,6 @@ class TasksController < ApplicationController
   def destroy
     find_task.destroy
 
-    redirect_to request.referrer
   end
 
   def sort
@@ -96,18 +101,13 @@ class TasksController < ApplicationController
   def update_status
     @task = find_task
     if @task.status == "In Progress"
-
-      @task.update(:status => "Awaiting Reply")
-      redirect_to request.referrer
+      @task.update(:status => "Awaiting Reply", :position => 1)
     elsif @task.status == "Awaiting Reply"
-      @task.update(:status => "Pending")
-      redirect_to request.referrer
+      @task.update(:status => "Pending", :position => 1)
     elsif @task.status == "Pending"
-      @task.update(:status => "Completed")
-      redirect_to request.referrer
-    else
-      redirect_to request.referrer, :alert => "Task already completed!"
+      @task.update(:status => "Completed", :position => 1)
     end
+    # redirect_to request.referrer
   end
 
 private

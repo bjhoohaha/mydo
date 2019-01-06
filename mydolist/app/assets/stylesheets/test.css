@@ -10,22 +10,60 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  */
+ h1 {
+   margin: 0px 20px;
+ }
+
+ #nav-right {
+   float: right;
+ }
+
+ .list-group-item {
+   font-size: 12pt
+ }
+
+ .alert_container{
+   margin: 0px 30px;
+   height: 60px;
+ }
+
+ .form {
+   width: 800px;
+ }
 
  .row {
    background-color : white;
    font-size: 12pt;
-   padding: 20px;
+   padding: 20px 20px;
    height: 67px;
    word-wrap: break-word;
  }
 
 
+ a.show_task {
+     text-decoration: none
+ }
 
-#alert_container{
-  margin: 0px 30px;
-  height: 60px;
+
+.overdue {
+  font-weight: bold;
+  color: red;
 }
 
-.form {
-  width: 800px;
+.alert-my{
+  padding:15px;margin-bottom:20px;
+  border:1px solid transparent;
+  border-radius:4px;
+  color:#3c763d;
+  background-color:#dff0d8;
+  border-color:#d6e9c6
+}
+
+.alert-w{
+  padding:15px;margin-bottom:20px;
+  border:1px solid transparent;
+  border-radius:4px;
+  color:#856404;
+  background-color:#fff3cd;
+  border-color:#ffeeba;
 }

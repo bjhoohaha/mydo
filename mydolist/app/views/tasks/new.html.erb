@@ -8,19 +8,23 @@
     html: {class: "task_form"}  do |f| %>
   <%= f.label :title%>
   <%= f.text_field :title%>
-  <br></br>
+  <br>
+  </br>
   <%= f.label :description%>
   <%= f.text_area :description%>
-  <br></br>
+  <br>
+  </br>
   <%= f.label :status%>
   <%= f.select :status, options_for_select(
-  ["In Progress", "Awaiting Reply", "Pending", "Completed"] ),
-  {},
-  {class: "form form-group form-control"}%>
-  <input class= "color_picker" type="string" id ="task_color" name="task[color]" data-palette='["#0F8DFC","rgba(135,1,101)","#F00285","hsla(190,41%,95%,1)","#94B77E","#4C060A","#053F32","#ED8074","#788364","#FFD662"]'>
-  <br></br>
+      ["In Progress", "Awaiting Reply", "Pending", "Completed"]),
+      {}, {class: "form form-group form-control"} %>
+  <input class= "color_picker" type="string" id ="task_color" name="task[color]"
+         data-palette='["#0F8DFC","rgba(135,1,101)","#F00285","hsla(190,41%,95%,1)","#94B77E","#4C060A","#053F32","#ED8074","#788364","#FFD662"]'
+         value = "">
+  <br>
+  </br>
   <%= f.label :due_date %>
- <input type = "date" class = "datepicker" name="task[due_date]">
+ <input type = "date" class = "datepicker" name="task[due_date]" value = "">
   <br></br>
 
   <%= f.submit %>

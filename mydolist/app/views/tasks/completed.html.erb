@@ -1,6 +1,10 @@
 <%= render 'header' %>
-<br></br>
-
+<br>
+</br>
 <%# debug @task %>
-
-<%= render "table", task_parameter: @task %>
+<h1> Completed </h1>
+<br>
+</br>
+<div id = "completed-page">
+  <%= render "table", task_parameter: @task_completed , sortable:false, del:false%>
+</div>

@@ -1,86 +1,99 @@
 <% task_parameter.each_with_index do |t,index| %>
-  <% @update_status = t.status %>
-  <div class = "row" style = "background-color:<%= t.color%>">
-      <div class = "col-sm-1">
-      </div>
-      <div class = "col-sm-2">
-            <%= t.title %>
-      </div>
-      <div class = "col-sm-3">
-            <%= t.description %>
-      </div>
-      <div class = "col-sm-1">
+<% @update_status = t.status %>
+<% if sortable %>
+  <div class = "row" style = "background-color:<%= t.color %>" , id = "<%= dom_id(t) %>">
+<% else %>
+  <div class = "row" style = "background-color:<%= t.color %>">
+<% end %>
+    <div class = "col-sm-1">
+    <% unless t.time_left.blank? %>
+      <% if t.time_left == 0 %>
+        <div class = "overdue"> DUE TODAY </div>
+      <% elsif t.time_left < 0 %>
+        <div class = "overdue"> OVERDUE </div>
+      <% end %>
+    <%end %>
+    </div>
+    <div class = "col-sm-2"><%= t.title %></div>
+    <div class = "col-sm-3"><%= t.description %></div>
+    <div class = "col-sm-1">
+      <div class = "show-time">
         <center>
-            <% unless t.due_date.blank? %>
-            <%= (t.due_date - Date.today).numerator %>
+          <% if t.time_left.blank? %>
+            NA
+          <% else %>
+            <% if t.time_left > 0 %>
+              <%= t.time_left %>
+            <% else %>
+              NA
             <% end %>
+          <% end %>
         </center>
       </div>
-      <div class = "col-sm-2">
-            <%= link_to bookmark_task_tasks_path(:id => t.id),
-                class:"bookmark", method: :patch, remote:true do%>
-                <span class = "glyphicon glyphicon-tag"></span>
-            <% end %>
-            <div class = "status-show">
-                <%= t.status %>
+    </div>
+    <div class = "col-sm-1">
+      <%= link_to bookmark_task_tasks_path(:id => t.id),
+          class:"bookmark", method: :patch, remote:true do %>
+          <span class = "glyphicon glyphicon-tag"></span>
+      <% end %>
+    </div>
+    <div class= "col-sm-1">
+      <div class = "status-show"><%= t.status %></div>
+    </div>
+    <div class= "col-sm-1">
+      <% unless del %>
+        <% if @update_status == "In Progress" %>
+          <div class = "update-button">
+            <div class = "awaiting-reply-button">
+              <%= button_to "Awaiting Reply", {
+                    :controller => "tasks",
+                    :action => "update_status",
+                    :id => t.id, }, method: :patch, remote:true %>
             </div>
-      </div>
-      <div class= "col-sm-1">
-            <div class = "update-button">
-                <% if @update_status == "In Progress" %>
-                  <div class = "awaiting-reply-button">
-                    <%= button_to "Awaiting Reply",
-                        {
-                            :controller => "tasks",
-                            :action => "update_status",
-                            :id => t.id,
-
-                        }, method: :patch, remote:true%>
-                  </div>
-                  <div class = "pending-button", style = "display:none">
-                    <%= button_to "Pending",
-                        {
-                            :controller => "tasks",
-                            :action => "update_status",
-                            :id => t.id,
-
-                            }, method: :patch, remote:true%>
-                  </div>
-                <% elsif @update_status == "Awaiting Reply" %>
-                  <div class = "pending-button">
-                    <%= button_to "Pending",
-                        {
-                            :controller => "tasks",
-                            :action => "update_status",
-                            :id => t.id,
-
-                            }, method: :patch, remote:true%>
-                  </div>
-                <% end %>
+            <div class = "pending-button", style = "display:none">
+              <%= button_to "Pending", {
+                    :controller => "tasks",
+                    :action => "update_status",
+                    :id => t.id, }, method: :patch, remote:true %>
             </div>
-      </div>
-      <div class= "col-sm-1">
-            <% if @update_status != "Completed" %>
-                <div class = "complete-button">
-                    <%= button_to "Completed",
-                        {
-                            :controller => "tasks",
-                            :action => "complete_task",
-                            :id => t.id,
-
-                        }, method: :patch, remote:true%>
-                </div>
-            <% end %>
-      </div>
-      <div class = "col-sm-1">
-            <center>
-                <%= link_to edit_task_path(t), class: "link-edit" do %>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                <% end %>
-                <%= link_to t, class:"link-delete", remote: true, method: :delete do %>
-                    <span class="glyphicon glyphicon-trash"></span>
-                <% end %>
-            </center>
-      </div>
+          </div>
+        <% elsif @update_status == "Awaiting Reply" %>
+          <div class = "update-button">
+            <div class = "pending-button">
+              <%= button_to "Pending", {
+                :controller => "tasks",
+                :action => "update_status",
+                :id => t.id, }, method: :patch, remote:true %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class= "col-sm-1">
+      <% unless del %>
+        <% if @update_status != "Completed" %>
+          <div class = "complete-button">
+            <%= button_to "Completed",{
+                  :controller => "tasks",
+                  :action => "complete_task",
+                  :id => t.id,}, method: :patch, remote:true %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class = "col-sm-1">
+      <center>
+        <% if del %>
+          <%= check_box_tag "t[]", t.id %>
+        <% else %>
+          <%= link_to edit_task_path(t), class: "link-edit" do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to task_path(t), class:"link-delete", remote: true, data: {confirm: "Are you sure?"}, method: :delete do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
+        <% end %>
+      </center>
+    </div>
   </div>
 <% end %>

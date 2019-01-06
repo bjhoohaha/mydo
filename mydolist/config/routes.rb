@@ -3,12 +3,15 @@ Rails.application.routes.draw do
   patch "/update_status" => 'tasks#update_status'
   resources :tasks do
     collection do
+      get :completed
+      get :active
+      get :time_remaining
+      get :delete_tasks
       patch :sort
       patch :complete_task
       patch :bookmark_task
-      get :completed
-      get :active
-      delete :delete_multiple
+      patch :update_time
+      delete :destroy_multiple
     end
   end
 

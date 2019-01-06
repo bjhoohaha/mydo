@@ -1,25 +1,36 @@
 class TasksController < ApplicationController
   # create new instance of the task
-
+#==================================== INDEX / GET ==============================
   def index
-    # @task.order("position")
-    @task_inprogress = find_task_status("In Progress")
-    @task_awaitingreply = find_task_status("Awaiting Reply")
-    @task_pending = find_task_status("Pending")
-    @task_completed = find_task_status("Completed")
-    @latest_task = Task.all.order('updated_at DESC').first
-
+    active_task
+    completed_task
   end
 
-  def completed
-    @task = Task.where(status:"Completed").order("position")
+  def delete_tasks
+    active_task
+    completed_task
   end
 
   def active
-    @task_inprogress = find_task_status("In Progress")
-    @task_awaitingreply = find_task_status("Awaiting Reply")
-    @task_pending = find_task_status("Pending")
+    active_task
   end
+
+  def completed
+    completed_task
+  end
+
+  def time_remaining
+    @task_today = Task.where("status != ? AND due_date == ?", "Completed", Date.today)
+    @task_tomorrow = Task.where("status != ? AND due_date == ?", "Completed", Date.today + 1)
+    @task_week = Task.where("status != ? AND due_date <= ? AND due_Date > ?", "Completed", Date.today + 1.week, Date.today + 1)
+    @task_month = Task.where("status != ? AND due_date <= ? AND due_date > ? ", "Completed", Date.today + 1.month, Date.today + 1.week)
+    @task_upcoming = Task.where("status != ? AND due_date > ?", "Completed", Date.today + 1.month)
+    @task_overdue = Task.where("status != ? AND due_date < ?", "Completed", Date.today)
+    @no_deadlines = Task.where("status != ? AND (due_date IS NULL)", "Completed")
+  end
+
+
+#=============================== GET / POST / CREATE ===========================
 
   def new
     @task = Task.new
@@ -28,37 +39,14 @@ class TasksController < ApplicationController
   def create
     #create a new instance
     @task = Task.new(task_params)
-    @task.position = 1
+    update_position(@task)
+    update_time_left(@task)
     @task.save
 
     redirect_to @task
   end
 
-  def bookmark_task
-    @task = find_task
-    if @task.color.empty?
-      @task.color = "#FFD662"
-      @task.save
-    else
-      @task.color = ""
-      @task.save
-    end
-  end
-
-  def complete_task
-    @task = find_task
-    if @task.status == "Completed"
-      # redirect_to request.referrer, :alert => "Task already completed!"
-    else
-      @task.status = "Completed"
-      @task.position = 1
-      @task.save
-    end
-
-    # respond_to do |format|
-    #   format.html {redirect_to request.referrer}
-    # end
-  end
+#=============================== PATCH / EDIT / UPDATE =========================
 
   def show
     find_task
@@ -71,35 +59,13 @@ class TasksController < ApplicationController
   def update
     find_task
     @task.update(task_params)
-
-    puts @task
+    update_position(@task)
+    update_time_left(@task)
     redirect_to @task
   end
 
-  def destroy
-    find_task.destroy
-
-  end
-
-  def sort
-    params[:task].each_with_index do |id, index|
-      Task.where(id: id).update_all({position:index + 1})
-    end
-
-    head :ok
-
-  end
-
-  def delete_multiple
-
-    Task.destroy(params[:tasks])
-
-    redirect_to tasks_path
-
-  end
-
   def update_status
-    @task = find_task
+    find_task
     if @task.status == "In Progress"
       @task.update(:status => "Awaiting Reply", :position => 1)
     elsif @task.status == "Awaiting Reply"
@@ -107,35 +73,98 @@ class TasksController < ApplicationController
     elsif @task.status == "Pending"
       @task.update(:status => "Completed", :position => 1)
     end
-    # redirect_to request.referrer
   end
 
-private
- def task_params
-   params.require(:task).permit(:title, :description, :status, :color, :due_date)
- end
-
- def find_task
-   @task  = Task.find(params[:id])
-   return @task
- end
-
- def find_task_status(s)
-   return Task.where(status: s).order("position")
- end
-
- def custom_order
-   @arr = []
-   @arr_with_status = ["In Progress", "Awaiting Reply", "Pending", "Completed"]
-
-   def push_into_array(v)
-     v.each do |p|
-       @arr.push(p)
+  def update_time
+    Task.all.each do |t|
+      unless t.due_date.blank?
+        t.time_left = (t.due_date - Date.today).numerator
+        t.save
+      end
     end
   end
 
-   @arr_with_status.map{|a| push_into_array(find_task_status(a))}
+  def complete_task
+    find_task
+    if @task.status != "Completed"
+      update_status_to_completed(@task)
+    end
+  end
 
-   return @arr
- end
+  def bookmark_task
+    find_task
+    if @task.color.empty?
+      @task.update(:color => "#FFD662")
+    else
+      @task.update(:color => "")
+    end
+  end
+
+  def sort
+    params[:task].each_with_index do |id, index|
+      Task.where(id: id).update_all({position:index + 1})
+    end
+    head :ok
+  end
+
+#================================= DESTROY / DELETE ============================
+
+  def destroy
+    find_task
+    @task.destroy
+  end
+
+  def destroy_multiple
+    Task.destroy(params[:t])
+
+    respond_to do |format|
+      format.html { redirect_to delete_tasks_tasks_path }
+      format.json { head :no_content }
+    end
+  end
+
+#====================================== HELPER =================================
+
+private
+
+#------------------------------------ VALIDATIONS ------------------------------
+  def task_params
+    params.require(:task).permit(:title, :description, :status, :color, :due_date)
+  end
+
+  #--------------------------------------- FIND ----------------------------------
+
+  def find_task
+   @task  = Task.find(params[:id])
+  end
+
+  def find_task_status(s)
+    return Task.where(status: s).order("position","updated_at DESC")
+  end
+
+  def active_task
+   @task_inprogress = find_task_status("In Progress")
+   @task_awaitingreply = find_task_status("Awaiting Reply")
+   @task_pending = find_task_status("Pending")
+  end
+
+  def completed_task
+     @task_completed = find_task_status("Completed")
+  end
+
+#-------------------------------------- UPDATE ---------------------------------
+  def update_position(task)
+    task.update(:position => 1)
+  end
+
+  def update_time_left(task)
+    unless task.due_date.blank?
+      task.update(:time_left => (task.due_date - Date.today).numerator)
+    end
+  end
+
+  def update_status_to_completed(task)
+    task.update(:status => "Completed")
+  end
+  
 end

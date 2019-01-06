@@ -1,7 +1,7 @@
-function make_id_sortable (id) {
-  document.addEventListener("turbolinks:load", function () {
+document.addEventListener("turbolinks:load", function () {
 
-    $(id).sortable(
+  function make_id_sortable(id) {
+    $("#" + id).sortable(
       {
       update: function(e, ui) {
         //console.log($(this).sortable('serialize'));
@@ -13,32 +13,61 @@ function make_id_sortable (id) {
       }
       }
     );
-  });
-};
+  }
 
-make_id_sortable("#tasks");
-make_id_sortable("#tasks-2");
-make_id_sortable("#tasks-3");
+  //make ids sortable in active tasks page
+  const sortable_ids = ["sortable-in-progress", "sortable-awaiting-reply", "sortable-pending"];
+  for(let i = 0; i < sortable_ids.length; i = i + 1){
+    make_id_sortable(sortable_ids[i]);
+  }
 
-$(document).on("turbolinks:load", function(){
-  $(".color_picker").paletteColorPicker(
-
-  );
-  $('.datepicker').datepicker({
-                    locale: 'ru',
-                    dateFormat: "yy-mm-dd"
-                });
-  // You can use something like...
-  // $('[data-palette]').paletteColorPicker();
 });
 
 $(document).on("turbolinks:load", function(){
   console.log("Page is loaded");
-  //show alert for task deleted
-  $("a.link-delete").on( "ajax:success", function (event){
-    alert("Task deleted.");
-    $(this).closest(".row").remove();
+
+  $(".color_picker").paletteColorPicker(
+
+  );
+  $('.datepicker').datepicker({
+    locale: 'ru',
+    dateFormat: "yy-mm-dd"
   });
+
+  function load_alerts () {
+
+    function display_success_alert(id, msg) {
+      if($("#" + id).children().length === 0) {
+        $("#" + id).append("<div class = alert_container><div class = alert-my>" + msg + "</div></div>");
+      } else {
+
+      }
+    }
+
+    function display_no_tasks_due() {
+      if($("#time-alert").children().length === 0) {
+        $("#time-alert").append("<h1>No Tasks Due</h1><br></br>");
+        $("#time-alert").append("<div class = alert_container><div class = alert-w>There are no <strong>Active Tasks Due</strong></div></div>");
+      } else {
+
+      }
+    }
+
+    function display_warning_alert(id, msg) {
+      if($("#" + id).find(".row").length === 0) {
+        $("#" + id).append("<div class = alert_container><div class = alert-w>" + msg + "</div></div>");
+      } else {
+
+      }
+    }
+    display_success_alert("sortable-in-progress", "There are no tasks <strong>In Progress</strong>");
+    display_success_alert("sortable-awaiting-reply", "There are no tasks <strong>Awaiting Reply</strong>");
+    display_success_alert("sortable-pending", "There are no tasks <strong>Pending</strong>");
+    display_no_tasks_due();
+    display_warning_alert("completed-page", "There are no <strong>Completed</strong> tasks");
+    display_warning_alert("all-task", "There are no <strong>Tasks</strong>");
+  };
+  load_alerts();
 
   //change color
   $("a.bookmark").click(function (){
@@ -52,43 +81,84 @@ $(document).on("turbolinks:load", function(){
       }
   });
 
+  //log color change success!
   $("a.bookmark").on( "ajax:success", function (event) {
     console.log("color is changed to " + $(this).parent().parent().css("background-color"));
   });
 
+  //delete
+  $("a.link-delete").on( "ajax:success", function (event){
+    alert("Task deleted.");
+    $(this).closest(".row").remove();
+    load_alerts();
+  });
 
-  $(".complete-button").on("ajax:success",function (){
-      console.log("task status changed to completed");
+  function remove_time() {
+     function remove_id(id){
+       if($("#" + id).children().length === 5) {
+         $("#" + id).remove();
+       } else{
 
-      alert("Task completed!");
-      var url = location.pathname;
-      if(url === "/tasks/active") {
-        $(this).closest(".row").remove();
-      } else{
-        $(this).closest(".row").prependTo("#completed");
-        $(this).closest(".row").find(".status-show").replaceWith("<div class = status-show>Completed</div>");
-        $(this).closest(".row").find(".update-button").remove();
-        $(this).remove();
-      }
-    });
+       }
+     }
 
-    $(".awaiting-reply-button").on("ajax:success",function (){
+    const time_array = ["overdue", "today", "tomorrow", "week", "month", "upcoming", "no-deadlines"];
+    for(let i = 0; i < time_array.length; i = i + 1) {
+      remove_id(time_array[i]);
+    }
+  }
 
-        alert("Task updated!");
-        $(this).closest(".row").prependTo("#awaiting-reply");
-        $(this).closest(".row").find(".status-show").replaceWith("<div class = status-show>Awaiting Reply</div>");
-        $(this).siblings().show();
-        $(this).remove();
+$(".complete-button").on("ajax:success",function (){
+  var url = location.pathname;
+  console.log("task status changed to completed");
+  alert("Task completed!");
+  if(url === "/tasks/active"|| url === "/tasks/time_remaining") {
+    $(this).closest(".row").remove();
+    remove_time();
+    load_alerts();
+  } else{
+    $(this).closest(".row").prependTo("#completed");
+    $(this).closest(".row").find(".status-show").replaceWith("<div class = status-show>Completed</div>");
+    $(this).closest(".row").find(".update-button").remove();
+    $(this).remove();
+  }
+});
 
-    });
+$(".awaiting-reply-button").on("ajax:success",function (){
+    var url = location.pathname;
+    console.log("task status changed to awaiting reply");
+    if(url === "/tasks/active") {
+      $("#sortable-awaiting-reply").find(".alert_container").remove();
+      $(this).closest(".row").prependTo("#sortable-awaiting-reply");
+      load_alerts();
+    } else {
+      $(this).closest(".row").prependTo("#awaiting-reply");
+    }
+    $(this).closest(".row").find(".status-show").replaceWith("<div class = status-show>Awaiting Reply</div>");
+    $(this).siblings().show();
+    $(this).remove();
+});
 
-    $(".pending-button").on("ajax:success",function (){
+$(".pending-button").on("ajax:success",function (){
+    var url = location.pathname;
+    console.log("task status changed to pending");
+    if(url === "/tasks/active") {
+      $("#sortable-pending").find(".alert_container").remove();
+      $(this).closest(".row").prependTo("#sortable-pending");
+      load_alerts();
+    } else {
+      $(this).closest(".row").prependTo("#pending");
+    }
+    $(this).closest(".row").find(".status-show").replaceWith("<div class = status-show>Pending</div>");
+    $(this).remove();
 
-        alert("Task updated!");
-        $(this).closest(".row").prependTo("#pending");
-        $(this).closest(".row").find(".status-show").replaceWith("<div class = status-show>Pending</div>");
-        $(this).remove();
+});
 
-    });
-  //display message for success
+  $("#time-button").on("ajax:success",function (){
+    if($(".show-time").css("display") === "none") {
+      $(".show-time").show();
+    } else{
+      $(".show-time").css("display", "none");
+    }
+  });
 });

@@ -1,0 +1,32 @@
+<%= render 'header' %>
+<br>
+</br>
+<h1> All Tasks </h1>
+<div class = col-sm-11 >
+</div>
+<br>
+</br>
+<%= form_tag destroy_multiple_tasks_path, method: :delete do %>
+<div id = "all-task">
+  <div id = "in-progress">
+    <%= render "table", task_parameter: @task_inprogress, sortable:false, del:true %>
+  </div>
+  <div id = "awaiting-reply">
+    <%= render "table", task_parameter: @task_awaitingreply, sortable:false, del:true %>
+  </div>
+  <div id = "pending">
+    <%= render "table", task_parameter: @task_pending, sortable:false, del:true%>
+  </div>
+  <div id = "completed">
+    <%= render "table", task_parameter: @task_completed, sortable:false, del:true %>
+  </div>
+</div>
+
+<div class = "col-sm-11">
+</div>
+<div class = "col-sm-1">
+<br>
+</br>
+<%= submit_tag "Delete Tasks" %>
+</div>
+<% end %>

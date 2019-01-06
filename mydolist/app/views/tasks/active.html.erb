@@ -1,14 +1,33 @@
 <%= render 'header' %>
-<br></br>
-<div id="" = "in-progress">
-<%= render "table", task_parameter: @task_inprogress %>
+<br>
+</br>
+<h1 id = "inprogress-title">In Progress</h1>
+<br>
+</br>
+<div id= "in-progress">
+  <div id = "sortable-in-progress" class = "ui-sortable" data-url = "<%=sort_tasks_path%>">
+    <%= render "table", task_parameter: @task_inprogress, sortable:true, del:false %>
+  </div>
 </div>
-<br><br>
+<br>
+<br>
+<h1 id = "awaitingreply-title">Awaiting Reply</h1>
+<br>
+</br>
 <div id = "awaiting-reply">
-<%= render "table", task_parameter: @task_awaitingreply %>
+  <div id = "sortable-awaiting-reply" class = "ui-sortable" data-url = "<%=sort_tasks_path%>">
+    <%= render "table", task_parameter: @task_awaitingreply, sortable:true, del:false %>
+  </div>
 </div>
-<br></br>
+<br>
+</br>
+<h1 id = "pending-title">Pending</h1>
+<br>
+</br>
 <div id = "pending">
-<%= render "table", task_parameter: @task_pending %>
+  <div id = "sortable-pending" class = "ui-sortable" data-url = "<%=sort_tasks_path%>">
+    <%= render "table", task_parameter: @task_pending, sortable:true, del:false %>
+  </div>
 </div>
-<br></br>
+<br>
+</br>

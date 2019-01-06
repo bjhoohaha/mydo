@@ -1,0 +1,76 @@
+<%= render "header" %>
+<br>
+</br>
+<div id = "time-alert">
+  <% unless @task_overdue.empty? %>
+    <div id = "overdue">
+      <h1>Overdue</h1>
+      <br>
+      </br>
+        <%= render "table", task_parameter: @task_overdue, sortable:false, del:false %>
+      <br>
+      </br>
+    </div>
+  <% end %>
+  <% unless @task_today.empty? %>
+    <div id = "today">
+      <h1>Today</h1>
+      <br>
+      </br>
+        <%= render "table", task_parameter: @task_today, sortable:false, del:false %>
+      <br>
+      </br>
+    </div>
+  <% end %>
+
+  <% unless @task_tomorrow.empty? %>
+    <div id = "tomorrow">
+      <h1>Tomorrow</h1>
+      <br>
+      </br>
+        <%= render "table", task_parameter: @task_tomorrow, sortable:false, del:false %>
+      <br>
+      </br>
+    </div>
+  <% end %>
+  <% unless @task_week.empty? %>
+    <div id = "week">
+      <h1>This Week</h1>
+      <br>
+      </br>
+        <%= render "table", task_parameter: @task_week, sortable:false, del:false %>
+        <br>
+      </br>
+    </div>
+  <% end %>
+  <% unless @task_month.empty? %>
+    <div id = "month">
+      <h1>This Month</h1>
+      <br>
+      </br>
+        <%= render "table", task_parameter: @task_month, sortable:false, del:false %>
+      <br>
+      </br>
+    </div>
+  <% end %>
+  <% unless @task_upcoming.empty? %>
+    <div id = "upcoming">
+      <h1>Upcoming</h1>
+      <br>
+      </br>
+        <%= render "table", task_parameter: @task_Upcoming, sortable:false, del:false %>
+      <br>
+      </br>
+    </div>
+  <% end %>
+  <% unless @no_deadlines.empty? %>
+    <div id = "no-deadlines">
+      <h1>No Deadlines</h1>
+      <br>
+      </br>
+        <%= render "table", task_parameter: @no_deadlines, sortable:false, del:false %>
+        <br>
+      </br>
+    </div>
+  <% end %>
+</div>

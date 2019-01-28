@@ -1,0 +1,15 @@
+current directory: /Users/bj/Desktop/mydo/mydolist/.gems/ruby/2.6.0/gems/bindex-0.5.0/ext/bindex
+/Users/bj/.rvm/rubies/ruby-2.6.0/bin/ruby -I /Users/bj/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0 -r ./siteconf20190129-53439-10rl1nb.rb extconf.rb
+creating Makefile
+
+current directory: /Users/bj/Desktop/mydo/mydolist/.gems/ruby/2.6.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR=" clean
+
+current directory: /Users/bj/Desktop/mydo/mydolist/.gems/ruby/2.6.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR="
+compiling cruby.c
+linking shared-object bindex/cruby.bundle
+
+current directory: /Users/bj/Desktop/mydo/mydolist/.gems/ruby/2.6.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 cruby.bundle ./.gem.20190129-53439-1w0r40e/bindex

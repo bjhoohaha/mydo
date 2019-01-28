@@ -1,0 +1,15 @@
+current directory: /Users/bj/Desktop/mydo/mydolist/.gems/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+/Users/bj/.rvm/rubies/ruby-2.6.0/bin/ruby -I /Users/bj/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0 -r ./siteconf20190129-53439-1lftqpt.rb extconf.rb
+creating Makefile
+
+current directory: /Users/bj/Desktop/mydo/mydolist/.gems/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /Users/bj/Desktop/mydo/mydolist/.gems/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+
+current directory: /Users/bj/Desktop/mydo/mydolist/.gems/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 websocket_mask.bundle ./.gem.20190129-53439-n3chj5

@@ -1,0 +1,57 @@
+I, [2019-01-29T00:22:26.127371 #49184]  INFO -- : [24427636-1344-4aa5-b352-be7f2a7a7a04] Started GET "/" for 127.0.0.1 at 2019-01-29 00:22:26 +0800
+I, [2019-01-29T00:22:26.128563 #49184]  INFO -- : [24427636-1344-4aa5-b352-be7f2a7a7a04] Processing by TasksController#index as HTML
+D, [2019-01-29T00:22:26.151456 #49184] DEBUG -- : [24427636-1344-4aa5-b352-be7f2a7a7a04]   [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+I, [2019-01-29T00:22:26.151646 #49184]  INFO -- : [24427636-1344-4aa5-b352-be7f2a7a7a04] Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.4ms)
+F, [2019-01-29T00:22:26.152185 #49184] FATAL -- : [24427636-1344-4aa5-b352-be7f2a7a7a04]   
+F, [2019-01-29T00:22:26.152218 #49184] FATAL -- : [24427636-1344-4aa5-b352-be7f2a7a7a04] ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: tasks: SELECT "tasks".* FROM "tasks"):
+F, [2019-01-29T00:22:26.152243 #49184] FATAL -- : [24427636-1344-4aa5-b352-be7f2a7a7a04]   
+F, [2019-01-29T00:22:26.152269 #49184] FATAL -- : [24427636-1344-4aa5-b352-be7f2a7a7a04] app/controllers/tasks_controller.rb:88:in `update_time'
+I, [2019-01-29T00:22:28.089497 #49184]  INFO -- : [a81980dc-2649-4e2a-bdef-755d07c68085] Started GET "/" for 127.0.0.1 at 2019-01-29 00:22:28 +0800
+I, [2019-01-29T00:22:28.090119 #49184]  INFO -- : [a81980dc-2649-4e2a-bdef-755d07c68085] Processing by TasksController#index as HTML
+D, [2019-01-29T00:22:28.091337 #49184] DEBUG -- : [a81980dc-2649-4e2a-bdef-755d07c68085]   [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+I, [2019-01-29T00:22:28.091480 #49184]  INFO -- : [a81980dc-2649-4e2a-bdef-755d07c68085] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.2ms)
+F, [2019-01-29T00:22:28.092096 #49184] FATAL -- : [a81980dc-2649-4e2a-bdef-755d07c68085]   
+F, [2019-01-29T00:22:28.092133 #49184] FATAL -- : [a81980dc-2649-4e2a-bdef-755d07c68085] ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: tasks: SELECT "tasks".* FROM "tasks"):
+F, [2019-01-29T00:22:28.092160 #49184] FATAL -- : [a81980dc-2649-4e2a-bdef-755d07c68085]   
+F, [2019-01-29T00:22:28.092189 #49184] FATAL -- : [a81980dc-2649-4e2a-bdef-755d07c68085] app/controllers/tasks_controller.rb:88:in `update_time'
+I, [2019-01-29T00:22:32.276172 #49184]  INFO -- : [fbed2ef1-dbe7-47f2-a80e-11004eb5650b] Started GET "/" for 127.0.0.1 at 2019-01-29 00:22:32 +0800
+I, [2019-01-29T00:22:32.276686 #49184]  INFO -- : [fbed2ef1-dbe7-47f2-a80e-11004eb5650b] Processing by TasksController#index as HTML
+D, [2019-01-29T00:22:32.277690 #49184] DEBUG -- : [fbed2ef1-dbe7-47f2-a80e-11004eb5650b]   [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+I, [2019-01-29T00:22:32.277814 #49184]  INFO -- : [fbed2ef1-dbe7-47f2-a80e-11004eb5650b] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.2ms)
+F, [2019-01-29T00:22:32.278355 #49184] FATAL -- : [fbed2ef1-dbe7-47f2-a80e-11004eb5650b]   
+F, [2019-01-29T00:22:32.278386 #49184] FATAL -- : [fbed2ef1-dbe7-47f2-a80e-11004eb5650b] ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: tasks: SELECT "tasks".* FROM "tasks"):
+F, [2019-01-29T00:22:32.278410 #49184] FATAL -- : [fbed2ef1-dbe7-47f2-a80e-11004eb5650b]   
+F, [2019-01-29T00:22:32.278438 #49184] FATAL -- : [fbed2ef1-dbe7-47f2-a80e-11004eb5650b] app/controllers/tasks_controller.rb:88:in `update_time'
+I, [2019-01-29T00:22:33.500638 #49184]  INFO -- : [a908668a-78da-4c6e-b3c9-e25574e4ced2] Started GET "/mydo" for 127.0.0.1 at 2019-01-29 00:22:33 +0800
+F, [2019-01-29T00:22:33.501196 #49184] FATAL -- : [a908668a-78da-4c6e-b3c9-e25574e4ced2]   
+F, [2019-01-29T00:22:33.501241 #49184] FATAL -- : [a908668a-78da-4c6e-b3c9-e25574e4ced2] ActionController::RoutingError (No route matches [GET] "/mydo"):
+F, [2019-01-29T00:22:33.501278 #49184] FATAL -- : [a908668a-78da-4c6e-b3c9-e25574e4ced2]   
+F, [2019-01-29T00:22:33.501320 #49184] FATAL -- : [a908668a-78da-4c6e-b3c9-e25574e4ced2] actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] railties (5.2.2) lib/rails/engine.rb:524:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+[a908668a-78da-4c6e-b3c9-e25574e4ced2] puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+I, [2019-01-29T00:22:38.467406 #49184]  INFO -- : [d422a18f-4817-4e6e-9db8-34da6daf86ab] Started GET "/" for 127.0.0.1 at 2019-01-29 00:22:38 +0800
+I, [2019-01-29T00:22:38.467945 #49184]  INFO -- : [d422a18f-4817-4e6e-9db8-34da6daf86ab] Processing by TasksController#index as HTML
+D, [2019-01-29T00:22:38.469172 #49184] DEBUG -- : [d422a18f-4817-4e6e-9db8-34da6daf86ab]   [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks"[0m
+I, [2019-01-29T00:22:38.469364 #49184]  INFO -- : [d422a18f-4817-4e6e-9db8-34da6daf86ab] Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.3ms)
+F, [2019-01-29T00:22:38.469905 #49184] FATAL -- : [d422a18f-4817-4e6e-9db8-34da6daf86ab]   
+F, [2019-01-29T00:22:38.469937 #49184] FATAL -- : [d422a18f-4817-4e6e-9db8-34da6daf86ab] ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: tasks: SELECT "tasks".* FROM "tasks"):
+F, [2019-01-29T00:22:38.469959 #49184] FATAL -- : [d422a18f-4817-4e6e-9db8-34da6daf86ab]   
+F, [2019-01-29T00:22:38.469981 #49184] FATAL -- : [d422a18f-4817-4e6e-9db8-34da6daf86ab] app/controllers/tasks_controller.rb:88:in `update_time'

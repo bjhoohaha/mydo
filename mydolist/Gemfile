@@ -36,7 +36,6 @@ gem 'rails-ujs', '~> 0.1.0'
 gem 'jquery-ui-rails'
 gem 'acts_as_list'
 gem 'rails_sortable'
-gem 'bootstrap', '~> 4.2.1'
 gem 'bootstrap-select-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

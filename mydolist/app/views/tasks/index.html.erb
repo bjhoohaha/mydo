@@ -2,7 +2,7 @@
 <br>
 </br>
 <h1> All Tasks </h1>
-<div class = col-sm-11 >
+<div class = col-sm-11>
 </div>
 <div class= col-sm-1>
   <%= link_to"Delete Tasks", {
@@ -14,15 +14,15 @@
 </br>
 <div id = "all-task" >
   <div id = "in-progress">
-    <%= render "table", task_parameter: @task_inprogress, sortable: false , del: false %>
+    <%= render "table", task_parameter: @task_inprogress, del: false %>
   </div>
   <div id = "awaiting-reply">
-    <%= render "table", task_parameter: @task_awaitingreply, sortable: false , del: false %>
+    <%= render "table", task_parameter: @task_awaitingreply, del: false %>
   </div>
   <div id = "pending">
-    <%= render "table", task_parameter: @task_pending, sortable: false, del: false %>
+    <%= render "table", task_parameter: @task_pending, del: false %>
   </div>
   <div id = "completed">
-    <%= render "table", task_parameter: @task_completed, sortable: false, del: false %>
+    <%= render "table", task_parameter: @task_completed, del: false %>
   </div>
 </div>

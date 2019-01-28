@@ -1,10 +1,6 @@
 <% task_parameter.each_with_index do |t,index| %>
 <% @update_status = t.status %>
-<% if sortable %>
   <div class = "row" style = "background-color:<%= t.color %>" , id = "<%= dom_id(t) %>">
-<% else %>
-  <div class = "row" style = "background-color:<%= t.color %>">
-<% end %>
     <div class = "col-sm-1">
     <% unless t.time_left.blank? %>
       <% if t.time_left == 0 %>
@@ -50,7 +46,7 @@
                     :action => "update_status",
                     :id => t.id, }, method: :patch, remote:true %>
             </div>
-            <div class = "pending-button", style = "display:none">
+            <div class = "pending-button" class = "pending-button" style = "display:none">
               <%= button_to "Pending", {
                     :controller => "tasks",
                     :action => "update_status",

@@ -1,0 +1,58 @@
+<div class = "container">
+  <div class = "col"></div>
+  <div class ="col-10">
+    <%= #form for @task variable
+        form_for  @task,
+        #routing to new
+        url: {action: action_path},
+        #name of class for html file
+        html: {class: "task_form"}  do |f| %>
+      <% if @task.errors.any? %>
+        <% @task.errors.full_messages.each do |msg| %>
+          <div class = "alert alert-danger">
+            <p>
+              <strong>Error: </strong>
+              <%= msg %>
+            </p>
+            </div>
+        <% end %>
+      <% end %>
+      <p>
+      <%= f.label :title%>
+      </p>
+      <%= f.text_field :title%>
+      <br></br>
+      <p>
+      <%= f.label :description%>
+      </p>
+      <%= f.text_area :description%>
+      <br></br>
+      <p>
+      <%= f.label :status%>
+      </p>
+      <%= f.select :status, options_for_select(
+          ["In Progress", "Awaiting Reply", "Pending", "Completed"], selected: @task.status),
+          {}, {class: "form form-group form-control"} %>
+      <br></br
+      <p>
+      <%= f.label :due_date %></p>
+      <input type = "date" class = "datepicker" name="task[due_date]" value = <%= @task.due_date %> >
+      <br></br>
+      <br></br>
+      <div class = "container">
+        <input class= "color_picker" type="string" id ="task_color" name="task[color]"
+               data-palette='["#EDF6F7","#F0EAD6","#92A8D1", "#E8B5CE", "#FFD662"]'
+               value = <%= @task.color %>>
+      </div>
+      <br></br>
+      <br></br>
+      <p>
+        <div class = 'clearfix'>
+          <%= f.submit class: 'btn btn-primary float-left'%>
+          <%= link_to 'Back', tasks_path, class: 'btn btn-primary float-right'%>
+        </div>
+      </p>
+    <% end %>
+  </div>
+  <div class = "col"></div>
+</div>

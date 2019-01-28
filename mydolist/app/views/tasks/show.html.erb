@@ -1,23 +1,53 @@
 <%= render 'header' %>
-
-<strong>Title: </strong>
-<%= @task.title %>
-<br>
-</br>
-<strong>Description: </strong>
-<%= @task.description %>
-<br>
-</br>
-<strong>Status: </strong>
-<%= @task.status %>
-<br>
-</br>
-<strong>Color: </strong>
-<%= @task.color %>
-<br>
-</br>
-<strong>Due Date: </strong>
-<%= @task.due_date %>
-<br>
-</br>
-<%= link_to 'Back', tasks_path %>
+<div class = "container">
+  <div class = "col">
+  </div>
+  <div class = "col-10">
+    <div class="row">
+      <div class = "d-inline text-primary">
+        <h2>
+          <%= @task.title %>
+        </h2>
+      </div>
+    </div>
+    <p>
+    </p>
+    <div class = "line">
+    </div>
+    <div class = "row">
+      <% if @task.color.blank? %>
+      <div id = "bookmark-color">
+        No bookmark color
+      </div>
+      <% else %>
+      <div id = "bookmark-color" style = "background-color:<%= @task.color %>;">
+      </div>
+      <% end %>
+    </div>
+    <br></br>
+    <p></p>
+    <div class = "line">
+    </div>
+    <div class = "row">
+      <div class = "left-row">
+        <strong>Status: </strong>
+        <%= @task.status %>
+      </div>
+      <div class = "right-row">
+        <strong>Due Date: </strong>
+        <% if @task.due_date.blank? %>
+          No deadlines
+        <% else %>
+          <%= @task.due_date %>
+        <% end %>
+      </div>
+    </div>
+    <p style = 'font-size:18px;'>
+      <br></br>
+      <%= @task.description %>
+    </p>
+  </div>
+  <div class = "col">
+  </div>
+  <%= button_to "Edit", edit_task_path(@task), method: :get, class: "btn btn-primary"%>
+</div>

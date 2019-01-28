@@ -1,0 +1,61 @@
+function load_alerts () {
+
+  function display_success_alert(id, msg) {
+    if($("#" + id).children().length === 0) {
+      $("#" + id).append("<div class = alert_container><div class = alert-my>" + msg + "</div></div>");
+    } else {
+
+    }
+  }
+
+  function display_no_tasks_due() {
+    if($("#time-alert").children().length === 0) {
+      $("#time-alert").append("<h1>No Tasks Due</h1><br></br>");
+      $("#time-alert").append("<div class = alert_container><div class = alert-w>There are no <strong>Active Tasks Due</strong></div></div>");
+    } else {
+
+    }
+  }
+
+  function display_warning_alert(id, msg) {
+    if($("#" + id).find(".row").length === 0) {
+      $("#" + id).append("<div class = alert_container><div class = alert-w>" + msg + "</div></div>");
+    } else {
+
+    }
+  }
+  display_success_alert("sortable-in-progress", "There are no tasks <strong>In Progress</strong>");
+  display_success_alert("sortable-awaiting-reply", "There are no tasks <strong>Awaiting Reply</strong>");
+  display_success_alert("sortable-pending", "There are no tasks <strong>Pending</strong>");
+  display_no_tasks_due();
+  display_warning_alert("completed-page", "There are no <strong>Completed</strong> tasks");
+  display_warning_alert("all-task", "There are no <strong>Tasks</strong>");
+};
+
+<% if @task.status == "Awaiting Reply" %>
+    var url = location.pathname;
+    console.log("task status changed to awaiting reply");
+    if(url === "/tasks/active") {
+      $("#sortable-awaiting-reply").find(".alert_container").remove();
+      $("#task_<%= @task.id %>").prependTo("#sortable-awaiting-reply");
+      load_alerts();
+    } else {
+      $("#task_<%= @task.id %>").prependTo("#awaiting-reply");
+    }
+    $("#task_<%= @task.id %>").find(".status-show").replaceWith("<div class = status-show>Awaiting Reply</div>");
+    $("#task_<%= @task.id %>").find(".pending-button").show();
+    $("#task_<%= @task.id %>").find(".awaiting-reply-button").remove();
+
+<% elsif @task.status = "Pending" %>
+    var url = location.pathname;
+    console.log("task status changed to pending");
+    if(url === "/tasks/active") {
+      $("#sortable-pending").find(".alert_container").remove();
+      $("#task_<%= @task.id %>").prependTo("#sortable-pending");
+      load_alerts();
+    } else {
+      $("#task_<%= @task.id %>").prependTo("#pending");
+    }
+    $("#task_<%= @task.id %>").find(".status-show").replaceWith("<div class = status-show>Pending</div>");
+    $("#task_<%= @task.id %>").find(".pending-button").remove();
+<% end %>

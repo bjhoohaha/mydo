@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :update_time, only: [:index, :time_remaining]
   # create new instance of the task
 #==================================== INDEX / GET ==============================
   def index
@@ -9,6 +10,7 @@ class TasksController < ApplicationController
   def delete_tasks
     active_task
     completed_task
+    @error = false
   end
 
   def active
@@ -41,9 +43,9 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     update_position(@task)
     update_time_left(@task)
-    @task.save
+    validate_params(@task, @task, "new")
 
-    redirect_to @task
+    #redirect_to @task
   end
 
 #=============================== PATCH / EDIT / UPDATE =========================
@@ -58,10 +60,14 @@ class TasksController < ApplicationController
 
   def update
     find_task
-    @task.update(task_params)
-    update_position(@task)
-    update_time_left(@task)
-    redirect_to @task
+
+    if @task.update(task_params)
+      update_position(@task)
+      update_time_left(@task)
+      redirect_to @task
+    else
+      render 'edit'
+    end
   end
 
   def update_status
@@ -73,6 +79,9 @@ class TasksController < ApplicationController
     elsif @task.status == "Pending"
       @task.update(:status => "Completed", :position => 1)
     end
+    # respond_to do |format|
+    #   format.js
+    # end
   end
 
   def update_time
@@ -88,7 +97,10 @@ class TasksController < ApplicationController
     find_task
     if @task.status != "Completed"
       update_status_to_completed(@task)
+    respond_to do |format|
+      format.js
     end
+  end
   end
 
   def bookmark_task
@@ -115,11 +127,20 @@ class TasksController < ApplicationController
   end
 
   def destroy_multiple
-    Task.destroy(params[:t])
-
-    respond_to do |format|
-      format.html { redirect_to delete_tasks_tasks_path }
-      format.json { head :no_content }
+    if params[:t].blank?
+      active_task
+      completed_task
+      if Task.all.blank?
+      else
+        @error = true
+      end
+      render 'delete_tasks'
+    else
+      Task.destroy(params[:t])
+      respond_to do |format|
+        format.html { redirect_to delete_tasks_tasks_path }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -131,6 +152,15 @@ private
   def task_params
     params.require(:task).permit(:title, :description, :status, :color, :due_date)
   end
+
+  def validate_params(task, url, form)
+    if task.save
+      redirect_to url
+    else
+      render form
+    end
+  end
+
 
   #--------------------------------------- FIND ----------------------------------
 
@@ -166,5 +196,4 @@ private
   def update_status_to_completed(task)
     task.update(:status => "Completed")
   end
-  
 end

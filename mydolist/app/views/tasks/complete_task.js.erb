@@ -1,0 +1,63 @@
+function remove_time() {
+   function remove_id(id){
+     if($("#" + id).children().length === 5) {
+       $("#" + id).remove();
+     } else{
+
+     }
+   }
+
+  const time_array = ["overdue", "today", "tomorrow", "week", "month", "upcoming", "no-deadlines"];
+  for(let i = 0; i < time_array.length; i = i + 1) {
+    remove_id(time_array[i]);
+  }
+}
+
+function load_alerts () {
+
+  function display_success_alert(id, msg) {
+    if($("#" + id).children().length === 0) {
+      $("#" + id).append("<div class = alert_container><div class = alert-my>" + msg + "</div></div>");
+    } else {
+
+    }
+  }
+
+  function display_no_tasks_due() {
+    if($("#time-alert").children().length === 0) {
+      $("#time-alert").append("<h1>No Tasks Due</h1><br></br>");
+      $("#time-alert").append("<div class = alert_container><div class = alert-w>There are no <strong>Active Tasks Due</strong></div></div>");
+    } else {
+
+    }
+  }
+
+  function display_warning_alert(id, msg) {
+    if($("#" + id).find(".row").length === 0) {
+      $("#" + id).append("<div class = alert_container><div class = alert-w>" + msg + "</div></div>");
+    } else {
+
+    }
+  }
+  display_success_alert("sortable-in-progress", "There are no tasks <strong>In Progress</strong>");
+  display_success_alert("sortable-awaiting-reply", "There are no tasks <strong>Awaiting Reply</strong>");
+  display_success_alert("sortable-pending", "There are no tasks <strong>Pending</strong>");
+  display_no_tasks_due();
+  display_warning_alert("completed-page", "There are no <strong>Completed</strong> tasks");
+  display_warning_alert("all-task", "There are no <strong>Tasks</strong>");
+}
+
+
+  var url = location.pathname;
+  console.log("task status changed to completed");
+  alert("Task completed!");
+  if(url === "/tasks/active"|| url === "/tasks/time_remaining") {
+    $("#task_<%= @task.id %>").remove();
+    remove_time();
+    load_alerts();
+  } else{
+    $("#task_<%= @task.id %>").prependTo("#completed");
+    $("#task_<%= @task.id %>").find(".status-show").replaceWith("<div class = status-show>Completed</div>");
+    $("#task_<%= @task.id %>").find(".update-button").remove();
+    $("#task_<%= @task.id %>").find(".complete-button").remove();
+  }

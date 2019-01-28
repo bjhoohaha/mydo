@@ -26,6 +26,11 @@ document.addEventListener("turbolinks:load", function () {
 $(document).on("turbolinks:load", function(){
   console.log("Page is loaded");
 
+  $(".datepicker").datepicker({
+    locale: 'ru',
+    dateFormat: "yy-mm-dd"
+  });
+
   $(".color_picker").paletteColorPicker(
 
   );
@@ -108,52 +113,6 @@ $(document).on("turbolinks:load", function(){
     }
   }
 
-$(".complete-button").on("ajax:success",function (){
-  var url = location.pathname;
-  console.log("task status changed to completed");
-  alert("Task completed!");
-  if(url === "/tasks/active"|| url === "/tasks/time_remaining") {
-    $(this).closest(".row").remove();
-    remove_time();
-    load_alerts();
-  } else{
-    $(this).closest(".row").prependTo("#completed");
-    $(this).closest(".row").find(".status-show").replaceWith("<div class = status-show>Completed</div>");
-    $(this).closest(".row").find(".update-button").remove();
-    $(this).remove();
-  }
-});
-
-$(".awaiting-reply-button").on("ajax:success",function (){
-    var url = location.pathname;
-    console.log("task status changed to awaiting reply");
-    if(url === "/tasks/active") {
-      $("#sortable-awaiting-reply").find(".alert_container").remove();
-      $(this).closest(".row").prependTo("#sortable-awaiting-reply");
-      load_alerts();
-    } else {
-      $(this).closest(".row").prependTo("#awaiting-reply");
-    }
-    $(this).closest(".row").find(".status-show").replaceWith("<div class = status-show>Awaiting Reply</div>");
-    $(this).siblings().show();
-    $(this).remove();
-});
-
-$(".pending-button").on("ajax:success",function (){
-    var url = location.pathname;
-    console.log("task status changed to pending");
-    if(url === "/tasks/active") {
-      $("#sortable-pending").find(".alert_container").remove();
-      $(this).closest(".row").prependTo("#sortable-pending");
-      load_alerts();
-    } else {
-      $(this).closest(".row").prependTo("#pending");
-    }
-    $(this).closest(".row").find(".status-show").replaceWith("<div class = status-show>Pending</div>");
-    $(this).remove();
-
-});
-
   $("#time-button").on("ajax:success",function (){
     if($(".show-time").css("display") === "none") {
       $(".show-time").show();
@@ -161,4 +120,24 @@ $(".pending-button").on("ajax:success",function (){
       $(".show-time").css("display", "none");
     }
   });
+
+  $("button.close").click(function () {
+    $('.alert_container').remove();
+  });
+});
+
+var addalert = "<div class = 'alert_container'><div class = 'alert alert-danger'><p><strong>Error: </strong>No tasks selected<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></p></div></div>";
+
+document.addEventListener("change",function () {
+
+  var url = location.pathname;
+  if(url === "/tasks/destroy_multiple" || url === "/tasks/delete_tasks") {
+    if($('input[name="t[]"]:checked').length === 0) {
+      $('#no-checkbox-error').prepend(addalert);
+    } else{
+      $('.alert_container').remove();
+    }
+  } else{
+
+  }
 });

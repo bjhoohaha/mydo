@@ -24,7 +24,8 @@
 
  .alert_container{
    margin: 0px 30px;
-   height: 60px;
+   height: 80px;
+   top:30px;
  }
 
  .form {
@@ -66,4 +67,78 @@
   color:#856404;
   background-color:#fff3cd;
   border-color:#ffeeba;
+}
+
+input[type=text] {
+  width:1140px;
+
+}
+
+input[type=date] {
+  width:1140px;
+
+}
+
+textarea{
+  width:1140px;
+  height: 150px;
+  resize: vertical;
+}
+
+select#task_status {
+  width:1140px;
+}
+
+.palette-color-picker-button {
+  width:40px;
+  height:40px;
+  margin-right: 16px;
+}
+
+input[type=string]{
+  display: inline-block;
+  width: 1068px;
+  padding-bottom: -2px;
+}
+
+.line{
+  width:1145px;
+  height:5px;
+  background-color: grey;
+}
+
+#bookmark-color {
+  width:1140px;
+  height: 80px;
+  border-radius:15px;
+  border:1px;
+  border:solid;
+  border-color: #7abaff;
+  padding:20px;
+  text-align:center;
+  font-style:italic;
+}
+
+.bookmark-row{
+  width: 100px;
+}
+
+.left-row{
+  float:left;
+  width:560px;
+  font-size:18px;
+}
+.right-row{
+  float:right;
+  width:560px;
+  font-size:18px;
+}
+
+.format-text{
+  font-size:8px;
+}
+
+.center{
+  width: 50%;
+  margin: 0 auto;
 }

@@ -13,7 +13,7 @@ Webpage application was tested using Safari Version 12.0.2 (14606.3.4)
 Things you may want to cover:
 
 * Ruby version
-ruby 2.3.7p456 (2018-03-28 revision 63024)
+ruby 2.6.0(2018-03-28 revision 63024)
 
 * System dependencies
 

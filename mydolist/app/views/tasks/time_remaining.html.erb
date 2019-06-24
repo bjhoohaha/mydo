@@ -12,4 +12,14 @@
       </br>
     </div>
   <% end %>
+  <% unless @task_week.empty? %>
+    <div id = "week">
+      <h1>This Week</h1>
+      <br>
+      </br>
+        <%= render "table", task_parameter: @task_week, del:false %>
+        <br>
+      </br>
+    </div>
+  <% end %>
 </div>

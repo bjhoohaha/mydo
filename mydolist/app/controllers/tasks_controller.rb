@@ -23,6 +23,7 @@ class TasksController < ApplicationController
 
   def time_remaining
       @task_today = Task.where(:due_date => Date.today)
+      @task_week = Task.where("due_date <= ?", Date.today + 1.week)
     # @task_today = Task.where("status != ? AND due_date == ?", "Completed", Date.today)
     # @task_tomorrow = Task.where("status != ? AND due_date == ?", "Completed", Date.today + 1)
     # @task_week = Task.where("status != ? AND due_date <= ? AND due_Date > ?", "Completed", Date.today + 1.week, Date.today + 1)

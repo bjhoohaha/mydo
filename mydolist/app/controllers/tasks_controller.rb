@@ -28,7 +28,7 @@ class TasksController < ApplicationController
     # @task_week = Task.where("status != ? AND due_date <= ? AND due_Date > ?", "Completed", Date.today + 1.week, Date.today + 1)
     # @task_month = Task.where("status != ? AND due_date <= ? AND due_date > ? ", "Completed", Date.today + 1.month, Date.today + 1.week)
     # @task_upcoming = Task.where("status != ? AND due_date > ?", "Completed", Date.today + 1.month)
-    @task_overdue = Task.where("status != ? AND due_date < ?", "Completed", Date.today)
+    # @task_overdue = Task.where("status != ? AND due_date < ?", "Completed", Date.today)
     # @no_deadlines = Task.where("status != ? AND (due_date IS NULL)", "Completed")
   end
 

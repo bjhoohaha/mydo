@@ -2,7 +2,7 @@
 
 This README would normally document whatever steps are necessary to get the application up and running.
 
-* Developer Informaiton
+Developer Informaiton
 Name: Ong Bing Jue
 
 The following application was developed using MacOS Mojave version 10.14.2 , Terminal Version 2.9.1 (421.1) and Atom 1.33.1 (Text Editor)

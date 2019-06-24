@@ -23,18 +23,12 @@ class TasksController < ApplicationController
 
   def time_remaining
       @task_today = Task.where("status == ?", "Completed")
-      @task_tomorrow = Task.where("status == ?", "Completed")
-      @task_week = Task.where("status == ?", "Completed")
-      @task_month = Task.where("status == ?", "Completed")
-      @task_upcoming = Task.where("status == ?", "Completed")
-      @task_overdue = Task.where("status == ?", "Completed")
-      @no_deadlines = Task.where("status == ?", "Completed")
     # @task_today = Task.where("status != ? AND due_date == ?", "Completed", Date.today)
     # @task_tomorrow = Task.where("status != ? AND due_date == ?", "Completed", Date.today + 1)
     # @task_week = Task.where("status != ? AND due_date <= ? AND due_Date > ?", "Completed", Date.today + 1.week, Date.today + 1)
     # @task_month = Task.where("status != ? AND due_date <= ? AND due_date > ? ", "Completed", Date.today + 1.month, Date.today + 1.week)
     # @task_upcoming = Task.where("status != ? AND due_date > ?", "Completed", Date.today + 1.month)
-    # @task_overdue = Task.where("status != ? AND due_date < ?", "Completed", Date.today)
+    @task_overdue = Task.where("status != ? AND due_date < ?", "Completed", Date.today)
     # @no_deadlines = Task.where("status != ? AND (due_date IS NULL)", "Completed")
   end
 

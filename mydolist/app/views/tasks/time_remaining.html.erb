@@ -1,3 +1,25 @@
 <%= render "header" %>
 <br>
 </br>
+<div id = "time-alert">
+  <% unless @task_overdue.empty? %>
+    <div id = "overdue">
+      <h1>Overdue</h1>
+      <br>
+      </br>
+        <%= render "table", task_parameter: @task_overdue, del:false %>
+      <br>
+      </br>
+    </div>
+  <% end %>
+  <% unless @task_today.empty? %>
+    <div id = "today">
+      <h1>Today</h1>
+      <br>
+      </br>
+        <%= render "table", task_parameter: @task_today, del:false %>
+      <br>
+      </br>
+    </div>
+  <% end %>
+</div>

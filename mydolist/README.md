@@ -18,39 +18,39 @@ ruby 2.6.0
 
 * Configuration
 Routes:
-CRUD path for each task
-show path for all completed task
-show path for all active task
-show path for all tasks that are near due date
-patch part to update position for jquery ui sortable
-update path for their relative positions
-update path for bookmark colour
-update path for update time left to due date
-update path to complete tasks that are in the different status
-delete path for deleting multiple
+CRUD path for each task\
+show path for all completed task\
+show path for all active task\
+show path for all tasks that are near due date\
+patch part to update position for jquery ui sortable\
+update path for their relative positions\
+update path for bookmark colour\
+update path for update time left to due date\
+update path to complete tasks that are in the different status\
+delete path for deleting multiple\
 
 
 * Database creation
-Each record is made up of a Task class
-Task has the following attributes :title, :description, :position, :due_date, :time_left
+Each record is made up of a Task class\
+Task has the following attributes :title, :description, :position, :due_date\
 
 * Database initialization
-1.Local copy of database has been uploaded
-2.Creating new tasks one by one
+1.Local copy of database has been uploaded\
+2.Creating new tasks one by one\
 
 * How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-1.Open Application
-2.Create New Task
-3.Change Status of Task when completed
-  Each task has a status of inprogress, awaiting reply, pending or completed
-4.Buttons can be pressed to update status along the way
-5.Edit Task information if required along the way
-6.Position active tasks in the active task tab (jquery ui sortable)
-7.Press "Complete" when Task finishes and view completed tasks
+1.Open Application\
+2.Create New Task\
+3.Change Status of Task when completed\
+  Each task has a status of inprogress, awaiting reply, pending or completed\
+4.Buttons can be pressed to update status along the way\
+5.Edit Task information if required along the way\
+6.Position active tasks in the active task tab (jquery ui sortable)\
+7.Press "Complete" when Task finishes and view completed tasks\
 
 
 * Heroku App:

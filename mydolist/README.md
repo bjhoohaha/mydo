@@ -4,7 +4,6 @@ This README would normally document whatever steps are necessary to get the appl
 
 * Developer Informaiton
 Name: Ong Bing Jue
-Matriculation number: A0182379R
 
 The following application was developed using MacOS Mojave version 10.14.2 , Terminal Version 2.9.1 (421.1) and Atom 1.33.1 (Text Editor)
 
@@ -13,7 +12,7 @@ Webpage application was tested using Safari Version 12.0.2 (14606.3.4)
 Things you may want to cover:
 
 * Ruby version
-ruby 2.6.0(2018-03-28 revision 63024)
+ruby 2.6.0
 
 * System dependencies
 
@@ -54,4 +53,5 @@ Task has the following attributes :title, :description, :position, :due_date, :t
 7.Press "Complete" when Task finishes and view completed tasks
 
 
-* ...
+* Heroku App:
+https://vast-taiga-58297.herokuapp.com/tasks
